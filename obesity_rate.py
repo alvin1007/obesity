@@ -39,11 +39,10 @@ weight = [45.0, 45.9, 46.8, 47.7, 48.6, 49.5, 50.4, 51.3, 52.2, 53.1,
             82.0, 82.9, 83.8, 84.7, 85.6, 86.5, 87.4, 88.3, 89.2, 90.1,
             91.0, 91.9, 92.8, 93.7, 94.6, 95.5, 96.4, 97.3, 98.2, 99.1 #obesity 4 step
           ] #weight(kg), man standard
-
 import numpy as np
 
+obesity_rate_target = ([0] * 30) + ([1] * 30) + ([2] * 30) + ([3] * 30) + ([4] * 30) 
 obesity_rate_data = np.column_stack((length, weight))
-obesity_rate_target = np.concatenate((np.ones(30), np.zeros(120))) # 1 = normal, 0 = obesity
 
 from sklearn.model_selection import train_test_split
 
@@ -65,7 +64,7 @@ test_scaled = (test_input - mean) /std
 
 import matplotlib.pyplot as plt
 
-new = ([175, 83] - mean) / std  #your length, weight
+new = ([175, 63] - mean) / std  #your length, weight
 distances, indexes = kn.kneighbors([new])
 plt.scatter(train_scaled[:,0], train_scaled[:,1], color = 'b')
 plt.scatter(new[0], new[1], marker = '^')
@@ -74,3 +73,16 @@ plt.xlabel('length')
 plt.ylabel('weight')
 plt.plot([-1.5, -0.5, 0.5, 1.5, 2], [-2, -1.37, -0.74, -0.1, 0.2], color = 'g') #normal line 
 plt.show()
+
+a = [0 ,1, 2, 3 ,4]
+
+if kn.predict([new]) == a[0]:
+  print("normal")
+elif kn.predict([new]) == a[1]:
+  print("obesity 1 step")
+elif kn.predict([new]) == a[2]:
+  print("obesity 2 step")
+elif kn.predict([new]) == a[3]:
+  print("obesity 3 step")
+elif kn.predict([new]) == a[4]:
+  print("obesity 4 step")
