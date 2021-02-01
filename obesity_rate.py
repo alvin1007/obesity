@@ -1,4 +1,4 @@
-length = [150.0, 151.0, 152.0, 153.0, 154.0, 155.0, 156.0, 157.0, 158.0, 159.0, 
+height = [150.0, 151.0, 152.0, 153.0, 154.0, 155.0, 156.0, 157.0, 158.0, 159.0, 
             160.0, 161.0, 162.0, 163.0, 164.0, 165.0, 166.0, 167.0, 168.0, 169.0,
             170.0, 171.0, 172.0, 173.0, 174.0, 175.0, 176.0, 177.0, 178.0, 179.0, #normal
           
@@ -42,13 +42,13 @@ weight = [45.0, 45.9, 46.8, 47.7, 48.6, 49.5, 50.4, 51.3, 52.2, 53.1,
 import numpy as np
 
 obesity_rate_target = ([0] * 30) + ([1] * 30) + ([2] * 30) + ([3] * 30) + ([4] * 30) 
-obesity_rate_data = np.column_stack((length, weight))
+obesity_rate_data = np.column_stack((height, weight))
 
 try:
-  your_length = input("your length >").strip()
+  your_height = input("your height >").strip()
   your_weight = input("yout weight >").strip()
   yours = []
-  yours.append(int(your_length))
+  yours.append(int(your_height))
   yours.append(int(your_weight))
 except:
   print('please input int or float')
@@ -72,12 +72,12 @@ kn.fit(train_scaled, train_target)
 test_scaled = (test_input - mean) /std
 
 import matplotlib.pyplot as plt
-new = (yours - mean) / std  #your length, weight
+new = (yours - mean) / std  #your height, weight
 distances, indexes = kn.kneighbors([new])
 plt.scatter(train_scaled[:,0], train_scaled[:,1], color = 'b')
 plt.scatter(new[0], new[1], marker = '^')
 plt.scatter(train_scaled[indexes,0], train_scaled[indexes,1], marker = 'D', color = 'r')
-plt.xlabel('length')
+plt.xlabel('height')
 plt.ylabel('weight')
 plt.plot([-1.5, -0.5, 0.5, 1.5, 2], [-2, -1.37, -0.74, -0.1, 0.2], color = 'g') #normal line 
 plt.show()
