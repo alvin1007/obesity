@@ -44,6 +44,15 @@ import numpy as np
 obesity_rate_target = ([0] * 30) + ([1] * 30) + ([2] * 30) + ([3] * 30) + ([4] * 30) 
 obesity_rate_data = np.column_stack((length, weight))
 
+try:
+  your_length = input("your length >").strip()
+  your_weight = input("yout weight >").strip()
+  yours = []
+  yours.append(int(your_length))
+  yours.append(int(your_weight))
+except:
+  print('please input int or float')
+
 from sklearn.model_selection import train_test_split
 
 train_input, test_input, train_target, test_target = train_test_split(
@@ -63,8 +72,7 @@ kn.fit(train_scaled, train_target)
 test_scaled = (test_input - mean) /std
 
 import matplotlib.pyplot as plt
-
-new = ([175, 63] - mean) / std  #your length, weight
+new = (yours - mean) / std  #your length, weight
 distances, indexes = kn.kneighbors([new])
 plt.scatter(train_scaled[:,0], train_scaled[:,1], color = 'b')
 plt.scatter(new[0], new[1], marker = '^')
@@ -73,6 +81,8 @@ plt.xlabel('length')
 plt.ylabel('weight')
 plt.plot([-1.5, -0.5, 0.5, 1.5, 2], [-2, -1.37, -0.74, -0.1, 0.2], color = 'g') #normal line 
 plt.show()
+
+#print your obesity step
 
 a = [0 ,1, 2, 3 ,4]
 
