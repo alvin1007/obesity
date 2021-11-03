@@ -65,11 +65,10 @@ std = np.std(train_input, axis = 0)
 train_scaled = (train_input - mean) / std
 
 from sklearn.neighbors import KNeighborsClassifier
-kn = KNeighborsClassifier()
-kn.fit(train_input, train_target) #train start
+kn = KNeighborsClassifier(n_neighbors=3)
+# kn.fit(train_input, train_target) #train start
 kn.fit(train_scaled, train_target) 
-
-test_scaled = (test_input - mean) /std
+print(kn.score(train_scaled, train_target))
 
 import matplotlib.pyplot as plt
 new = (yours - mean) / std  #your height, weight
